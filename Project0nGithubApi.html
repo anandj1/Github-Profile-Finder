@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Project</title>
+</head>
+<style>
+    body{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    .main{
+        display:  flex;
+        /* height: 100vh; */
+        justify-content: center;
+        align-items: center;
+    }
+    .head  {
+        display: flex;
+        gap: 80px;
+        margin-top: 4rem;
+    }
+    .input{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 3rem;
+       
+        
+    }
+    .list{
+        display: flex;
+        flex-direction: column;
+    }
+    .humble{
+        display:  flex;
+
+    }
+    #image{
+        height: 20rem;
+        width: 20rem;
+        border-radius: 100%;
+    }
+</style>
+<body>
+    <div class="input">
+        <form id="submit">
+            <div style=" display:  flex; flex-direction: column; gap: 30px;" >
+                <div style="display: flex; gap: 5px;  align-items: baseline;">
+                    <label style="font-size: larger; font-weight: 400; color: crimson;">Enter a Github Url : </label> <br> <br>
+                    <input style="padding: 4px; border: 3px solid black; border-radius: 30px;" id="url" type="text" placeholder="Enter url" required> <br> <br>
+                    
+                </div>
+                <button style=" padding: 0.3rem; cursor: pointer; border-radius:20px; background-color:  rgb(145, 201, 211); display: inline-block; border: 4px solid rebeccapurple;" id="fetch">  Submit</button>
+            </div>
+           
+          
+        </form>
+    </div>
+    <div class="main">
+        <div class="head">
+            <div class="photo">
+                <img src="" id="image">
+    
+    
+            </div>
+    
+            
+                <div class="List">
+                    <div class="humble">
+                        <h2 style=" color: darksalmon;"> ID : </h2>
+                        <h2  style="color: crimson;"  class="ids">  </h2>
+                    </div>
+    
+                    <div class="humble">
+                        <h2 style=" color: green;"> created at :  </h2>
+                        <h2 style="color: darkgreen;" class="created"></h2>
+                    </div>
+    
+                    <div class="humble">
+                        <h2 style="color: blue;"> updated_at : </h2>
+                        <h2 style="color: darkkhaki;" class="updated"></h2>
+                    </div>
+                    
+                   
+                     
+                </div>
+                
+               
+             
+    
+    
+    
+            </div>
+    
+    
+    
+        </div>
+  
+   
+
+    <script>
+        let url
+        document.querySelector("#submit").addEventListener('submit',async function(e){
+            e.preventDefault()
+            url = document.querySelector("#url").value
+            try{
+        const response = await fetch(url)
+        const data = await response.json()
+        console.log(data)
+        let cover_pic=  (data.avatar_url)
+        console.log(cover_pic)
+        
+        let datas = data.id
+        let created = data.created_at
+        let updated = data.updated_at
+        console.log(datas)
+        totaldata = datas
+
+    document.getElementById("image").src = cover_pic 
+    document.querySelector(".ids").textContent = datas
+    document.querySelector(".created").textContent = created
+    document.querySelector(".updated").textContent = updated
+
+    }
+    catch(error){
+        console.log("Error is ",error)
+    }
+
+        })
+       
+   
+    
+   
+
+
+
+
+    </script>
+    
+</body>
+</html>
